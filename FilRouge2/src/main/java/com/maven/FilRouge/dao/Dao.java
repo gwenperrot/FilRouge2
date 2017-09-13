@@ -125,7 +125,7 @@ public class Dao implements Idao {
 	}
 
 	@Override
-	public void modifierCompte(int idCompte, double solde) {
+	public void modifierCompte(Compte c) {
 		
 		try {
 		//1- charger le pilote
@@ -138,12 +138,12 @@ public class Dao implements Idao {
 		//3- connection a la base 
 		Connection conn = DriverManager.getConnection(adresse, login, mdp);
 		//4- preparer en envoyer la requete 
-		String requete = "UPDATE compte set solde=? WHERE idCompte=? ";
+		String requete = "UPDATE compte set solde=?, decouvert=?, tauxEpargne=? WHERE idCompte=? ";
 		
 		PreparedStatement ps = conn.prepareStatement(requete);
 		
-		ps.setDouble(1, solde);
-		ps.setInt(2, idCompte);
+		ps.setDouble(1, );
+		ps.setInt(2, );
 		ps.executeUpdate();
 		
 		ps.close();
@@ -158,7 +158,8 @@ public class Dao implements Idao {
 	
 
 	@Override
-	public void supprimerCompte(Compte c) {
+	public void supprimerCompte(int idCompte) {
+		Compte c = new Compte();
 		try {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
@@ -270,6 +271,47 @@ public class Dao implements Idao {
 	@Override
 	public void ajouterClient(Client cl, Conseiller c) {
 		System.out.println("J'ajoute un client � un conseiller");						
+	}
+
+	@Override
+	public Compte getCompte(int idCompte) {
+		Compte c = new Compte();
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+			String adresse="jdbc:mysql://localhost:8889/proxybanque";
+			String login="root";
+			String mdp="root";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "SELECT * FROM compte WHERE idCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setInt(1, idCompte);
+			
+			//5- recuperer le resultat
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			c.setIdCompte(idCompte);
+			c.setNumCompte(rs.getLong("numCompte"));
+			c.setDateOuverture(rs.getString("dateOuverture"));
+			c.setSolde(rs.getDouble("solde"));
+			((CompteCourant)c).setDecouvert(rs.getInt("decouvert"));
+			((CompteEpargne)c).setTauxEpargne(rs.getFloat("tauxEpargne"));
+
+			//6- liberer les ressources
+			rs.close();
+			ps.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return c;
 	}
 	
 

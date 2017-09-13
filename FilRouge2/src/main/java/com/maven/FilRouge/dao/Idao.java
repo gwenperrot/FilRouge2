@@ -31,8 +31,9 @@ public interface Idao {
 	
 	public void creerCompte(Compte c);
 	public Compte lireCompte(int idCompte);
-	public void modifierCompte(int idCompte, double solde);
-	public void supprimerCompte(Compte c);
+	public void modifierCompte(Compte c);
+	public void supprimerCompte(int idCompte);
+	public Compte getCompte(int idCompte);
 	public void faireVirement(Compte c);
 	public void simuler();
 	public void placerArgent(float montant, Compte c);

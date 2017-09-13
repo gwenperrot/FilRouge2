@@ -17,11 +17,11 @@ public class Lanceur {
 		IGerant ig = new GerantImpl();
 		
 		Compte c = new Compte();
-		c.setNumCompte(234234);
-		c.setDateOuverture("12/12/12");
-		c.setSolde((float)5000.0);
-		ic.creerCompte(c);
-		
+	//	c.setNumCompte(234234);
+	//	c.setDateOuverture("12/12/12");
+	//	c.setSolde((float)5000.0);
+	//	ic.creerCompte(c);
+	//	ic.supprimerCompte(1);
 		//System.out.println(ic.lireCompte(1));
 		
 		

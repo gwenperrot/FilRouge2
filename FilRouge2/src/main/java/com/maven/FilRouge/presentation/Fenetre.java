@@ -243,8 +243,8 @@ public class Fenetre extends JFrame {
 		ongletsupprimercompte.add(jtidCp3);
 		ongletsupprimercompte.add(tnumCp3);
 		ongletsupprimercompte.add(jtnumCp3);
-		ongletmodifiercompte.add(bCp3);
-		ongletmodifiercompte.add(jeventCp3);
+		ongletsupprimercompte.add(bCp3);
+		ongletsupprimercompte.add(jeventCp3);
 			//Ajout des onglets du compte
 		ongletgestioncompte.addTab("Créer", ongletcreercompte);
 		ongletgestioncompte.addTab("Lire", ongletlirecompte);
@@ -320,8 +320,8 @@ public class Fenetre extends JFrame {
 				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
 				c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
 				c.setDateOuverture(jtdateOuvertureCp.getText());
-				((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
-				((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
+				//((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
+				//((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
 				ic.creerCompte(c);
 				jtnumCp.setText("");
 				jtsoldeCp.setText("");
@@ -336,9 +336,10 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
+				c = ic.getCompte(Integer.parseInt(jtidCp1.getText()));
 				ic.lireCompte(Integer.parseInt(jtidCp1.getText()));
 				jtidCp1.setText("");
-				jeventCp1.setText("Compte n° "+jtnumCp.getText()+" de "+c.getNumCompte()+" ouvert le "+c.getDateOuverture()+"\ndécouvert = "+((CompteCourant) c).getDecouvert());
+				jeventCp1.setText("Compte n° "+c.getNumCompte()+" ouvert le "+c.getDateOuverture()+ " solde = "+c.getSolde()+ "0€");
 			}
 		});
 		
@@ -350,18 +351,19 @@ public class Fenetre extends JFrame {
 				if (jtsoldeCp2.getText()==null)
 					c.setSolde(0.01);
 				else c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
-				if (jtdecouvertCp2.getText()==null)
-					((CompteCourant) c).setDecouvert(999999998);
-				else ((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp2.getText()));
-				if (jttauxCp2.getText()==null)
-					((CompteEpargne) c).setTauxEpargne(0.01f);
-				else ((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp2.getText()));
-				ic.modifierCompte(c.getIdCompte(), c.getSolde(), ((CompteCourant) c).getDecouvert(), ((CompteEpargne) c).getTauxEpargne());
+//				if (jtdecouvertCp2.getText()==null)
+//					((CompteCourant) c).setDecouvert(999999998);
+//				else ((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp2.getText()));
+//				if (jttauxCp2.getText()==null)
+//					((CompteEpargne) c).setTauxEpargne(0.01f);
+//				else ((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp2.getText()));
+//				ic.modifierCompte(c.getIdCompte(), c.getSolde(), ((CompteCourant) c).getDecouvert(), ((CompteEpargne) c).getTauxEpargne());
+				ic.modifierCompte(c.getIdCompte(), c.getSolde());
 				jtidCp2.setText("");
 				jtsoldeCp2.setText("");
 				jtdecouvertCp2.setText("");
 				jttauxCp2.setText("");
-				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
+				jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
 			}
 		});
 		
@@ -372,7 +374,7 @@ public class Fenetre extends JFrame {
 				c = ic.getCompte(Integer.parseInt(jtidCp3.getText()));
 				ic.supprimerCompte(c.getIdCompte());
 				jtidCp3.setText("");
-				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été supprimé");
+				jeventCp3.setText("Le compte n° "+c.getNumCompte()+" a été supprimé");
 			}
 		});
 		

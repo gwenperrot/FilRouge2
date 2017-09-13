@@ -56,7 +56,7 @@ public class Dao implements Idao {
             Class.forName("com.mysql.jdbc.Driver");
 
             // 2- adresse de la BDD
-            String adresse = "jdbc:mysql://192.168.1.97:8889/proxybanque";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
             String login = "root";
             String mdp = "";
 
@@ -93,9 +93,9 @@ public class Dao implements Idao {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
 			//2- adresse de la base de donn�es
-			String adresse="jdbc:mysql://localhost:8889/proxybanque";
-			String login="root";
-			String mdp="root";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
 			
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
@@ -123,7 +123,38 @@ public class Dao implements Idao {
 		
 		return c;	
 	}
+	
+	@Override
+	public void modifierCompte(int idCompte, double solde) {	
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+	        String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+	        String login = "root";
+	        String mdp = "";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "UPDATE compte set solde=? WHERE idCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setDouble(1, solde);
+			ps.setInt(2, idCompte);
 
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}
+		
+	}
+	
 	@Override
 	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
 		
@@ -131,9 +162,9 @@ public class Dao implements Idao {
 		//1- charger le pilote
 		Class.forName("com.mysql.jdbc.Driver");
 		//2- adresse de la base de donn�es
-		String adresse="jdbc:mysql://localhost:8889/proxybanque";
-		String login="root";
-		String mdp="root";
+        String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+        String login = "root";
+        String mdp = "";
 		
 		//3- connection a la base 
 		Connection conn = DriverManager.getConnection(adresse, login, mdp);
@@ -158,11 +189,10 @@ public class Dao implements Idao {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			}
+		}
 	
 	}
 	
-
 	@Override
 	public void supprimerCompte(int idCompte) {
 		Compte c = new Compte();
@@ -170,9 +200,9 @@ public class Dao implements Idao {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
 			//2- adresse de la base de donn�es
-			String adresse="jdbc:mysql://localhost:8889/proxybanque";
-			String login="root";
-			String mdp="root";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
 			
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
@@ -181,8 +211,7 @@ public class Dao implements Idao {
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
 			
-			ps.setFloat(1, c.getIdCompte());
-	
+			ps.setInt(1, idCompte);
 			ps.executeUpdate();
 			
 			ps.close();
@@ -226,9 +255,9 @@ public class Dao implements Idao {
             Class.forName("com.mysql.jdbc.Driver");
 
             // 2- adresse de la BDD
-            String adresse = "jdbc:mysql://localhost:8889/proxybanque";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
             String login = "root";
-            String mdp = "root";
+            String mdp = "";
 
             // 3- Connection a la BDD
             Connection con = DriverManager.getConnection(adresse, login, mdp);
@@ -262,9 +291,9 @@ public class Dao implements Idao {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
 			//2- adresse de la base de donn�es
-			String adresse="jdbc:mysql://localhost:8889/proxybanque";
-			String login="root";
-			String mdp="root";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
 			
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
@@ -351,9 +380,9 @@ public class Dao implements Idao {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
 			//2- adresse de la base de donn�es
-			String adresse="jdbc:mysql://localhost:8889/proxybanque";
-			String login="root";
-			String mdp="root";
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
 			
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
@@ -370,8 +399,8 @@ public class Dao implements Idao {
 			c.setNumCompte(rs.getLong("numCompte"));
 			c.setDateOuverture(rs.getString("dateOuverture"));
 			c.setSolde(rs.getDouble("solde"));
-			((CompteCourant)c).setDecouvert(rs.getInt("decouvert"));
-			((CompteEpargne)c).setTauxEpargne(rs.getFloat("tauxEpargne"));
+			//((CompteCourant)c).setDecouvert(rs.getInt("decouvert"));
+			//((CompteEpargne)c).setTauxEpargne(rs.getFloat("tauxEpargne"));
 
 			//6- liberer les ressources
 			rs.close();
@@ -384,6 +413,5 @@ public class Dao implements Idao {
 		} 
 		return c;
 	}
-	
 
 }

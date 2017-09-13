@@ -79,6 +79,11 @@ public class ConseillerImpl implements IConseiller {
 	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
 		dao.modifierCompte(idCompte, solde, decouvert, tauxEpargne);			
 	}
+	
+	@Override
+	public void modifierCompte(int idCompte, double solde) {
+		dao.modifierCompte(idCompte, solde);			
+	}
 
 	/**
 	 * M�thode permettant � un conseiller de supprimer un compte bancaire

@@ -28,7 +28,6 @@ import com.maven.FilRouge.service.IGerant;
 
 public class Fenetre extends JFrame {
 
-	
 	private static final long serialVersionUID = -7186476640084782248L;
 
 	private IAuditeur ia = new AuditeurImpl();
@@ -174,8 +173,11 @@ public class Fenetre extends JFrame {
 		ongletcreerclient.add(bCl);
 		ongletcreerclient.add(jeventCl);
 		JTabbedPane ongletgestionclient = new JTabbedPane();
-		ongletgestionclient.addTab("Créer Client", ongletcreerclient);
-		
+		ongletgestionclient.addTab("Créer", ongletcreerclient);
+		ongletgestionclient.addTab("Lire", ongletlireclient);
+		ongletgestionclient.addTab("Modifier", ongletmodifierclient);
+		ongletgestionclient.addTab("Supprimer", ongletsupprimerclient);
+
 		//Création ongletgestionconseiller
 			//Création ongletcréerconseiller
 		ongletcreerconseiller.add(tnomCo);
@@ -191,7 +193,14 @@ public class Fenetre extends JFrame {
 		ongletcreerconseiller.add(bCo);
 		ongletcreerconseiller.add(jeventCo);
 		JTabbedPane ongletgestionconseiller = new JTabbedPane();
-		ongletgestionconseiller.addTab("Créer Conseiller", ongletcreerconseiller);
+		ongletgestionconseiller.addTab("Créer", ongletcreerconseiller);
+		ongletgestionconseiller.addTab("Lire", ongletlireconseiller);
+		ongletgestionconseiller.addTab("Modifier", ongletmodifierconseiller);
+		ongletgestionconseiller.addTab("Supprimer", ongletsupprimerconseiller);
+		ongletgestionconseiller.addTab("Attribuer Agence", ongletattribueragence);
+		ongletgestionconseiller.addTab("Ajouter employé", ongletajouterconseiller);
+		ongletgestionconseiller.addTab("Attribuer Gérant", ongletattribuergerant);
+		ongletgestionconseiller.addTab("Ajouter Conseiller", ongletajouterconseiller);
 		
 		//Création ongletgestioncompte
 			//Création ongletcréercompte
@@ -237,14 +246,15 @@ public class Fenetre extends JFrame {
 		ongletlirecompte.add(jeventCp2);
 			//Création ongletsupprimercompte
 		ongletsupprimercompte.add(tidCp3);
+		ongletsupprimercompte.add(jtidCp3);
 		ongletsupprimercompte.add(tnumCp3);
 		ongletsupprimercompte.add(jtnumCp3);
 			//Ajout des onglets du compte
 		JTabbedPane ongletgestioncompte = new JTabbedPane();
-		ongletgestioncompte.addTab("Créer Compte", ongletcreercompte);
-		ongletgestioncompte.addTab("Lire Compte", ongletlirecompte);
-		ongletgestioncompte.addTab("Modifier Compte", ongletmodifiercompte);
-		ongletgestioncompte.addTab("Supprimer Compte", ongletsupprimercompte);
+		ongletgestioncompte.addTab("Créer", ongletcreercompte);
+		ongletgestioncompte.addTab("Lire", ongletlirecompte);
+		ongletgestioncompte.addTab("Modifier", ongletmodifiercompte);
+		ongletgestioncompte.addTab("Supprimer", ongletsupprimercompte);
 		/*
 		//Création ongletaudition
 	    onglet4.setLayout(new BorderLayout());
@@ -367,11 +377,7 @@ public class Fenetre extends JFrame {
 				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
 				ic.supprimerCompte(c);
 				jtnumCp.setText("");
-				jtsoldeCp.setText("");
-				jtdateOuvertureCp.setText("");
-				jtdecouvertCp.setText("");
-				jttauxCp.setText("");
-				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été créé");
+				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été supprimé");
 			}
 		});
 		

@@ -144,8 +144,9 @@ public class Fenetre extends JFrame {
 	private JButton bCp2 = new JButton("Valider");
 		//Gestion Compte - Supprimer
 	private JLabel tidCp3 = new JLabel("ID");
-	private JTextField jtidCp3 = new JTextField(12);
+	private JLabel jeventCp3 = new JLabel("");
 	private JLabel tnumCp3 = new JLabel("Numéro");
+	private JTextField jtidCp3 = new JTextField(12);
 	private JTextField jtnumCp3 = new JTextField(12);
 	private JButton bCp3 = new JButton("Valider");
 
@@ -242,6 +243,8 @@ public class Fenetre extends JFrame {
 		ongletsupprimercompte.add(jtidCp3);
 		ongletsupprimercompte.add(tnumCp3);
 		ongletsupprimercompte.add(jtnumCp3);
+		ongletmodifiercompte.add(bCp3);
+		ongletmodifiercompte.add(jeventCp3);
 			//Ajout des onglets du compte
 		ongletgestioncompte.addTab("Créer", ongletcreercompte);
 		ongletgestioncompte.addTab("Lire", ongletlirecompte);

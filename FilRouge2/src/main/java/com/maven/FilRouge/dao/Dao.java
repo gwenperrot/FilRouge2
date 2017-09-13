@@ -13,6 +13,14 @@ import com.maven.FilRouge.metier.Compte;
 import com.maven.FilRouge.metier.Conseiller;
 import com.maven.FilRouge.metier.Employe;
 import com.maven.FilRouge.metier.Gerant;
+import com.maven.FilRouge.service.AuditeurImpl;
+import com.maven.FilRouge.service.ConseillerImpl;
+import com.maven.FilRouge.service.GerantImpl;
+import com.maven.FilRouge.service.IAuditeur;
+import com.maven.FilRouge.service.IConseiller;
+import com.maven.FilRouge.service.IGerant;
+import com.maven.FilRouge.metier.CompteCourant;
+import com.maven.FilRouge.metier.CompteEpargne;
 /**
  * 
  * @author 
@@ -56,11 +64,13 @@ public class Dao implements Idao {
             Connection con = DriverManager.getConnection(adresse, login, mdp);
 
          // 4- Preparation et envoi de la requete
-            String requete = "INSERT INTO  compte (numCompte, solde, dateOuverture, decouvert, tauxEpargne) VALUES(?,?,?,?,?)";
+            String requete = "INSERT INTO compte (numCompte, solde, dateOuverture, decouvert, tauxEpargne) VALUES(?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(requete);
             ps.setLong(1, c.getNumCompte());
-            ps.setFloat(2, c.getSolde());
+            ps.setDouble(2, c.getSolde());
             ps.setString(3, c.getDateOuverture());
+            ps.setInt(4, ((CompteCourant)c).getDecouvert());
+            ps.setFloat(5, ((CompteEpargne)c).getTauxEpargne());
             
             ps.executeUpdate();
 
@@ -77,7 +87,8 @@ public class Dao implements Idao {
 	}
 
 	@Override
-	public Compte lireCompte(Compte c) {
+	public Compte lireCompte(int idCompte) {
+		Compte c = new Compte();
 		try {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
@@ -92,10 +103,11 @@ public class Dao implements Idao {
 			String requete = "SELECT* FROM compte WHERE idCompte=? ";
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
-			ps.setLong(1, c.getNumCompte());
+			ps.setLong(1, idCompte);
 			
 			//5- recuperer le resultat
 			ResultSet rs = ps.executeQuery();
+			
 			rs.next();
 			c.setNumCompte(rs.getLong("numCompte"));
 			c.setSolde(rs.getFloat("solde"));
@@ -113,7 +125,7 @@ public class Dao implements Idao {
 	}
 
 	@Override
-	public void modifierCompte(int idCompte, float solde) {
+	public void modifierCompte(int idCompte, double solde) {
 		
 		try {
 		//1- charger le pilote
@@ -130,7 +142,7 @@ public class Dao implements Idao {
 		
 		PreparedStatement ps = conn.prepareStatement(requete);
 		
-		ps.setFloat(1, solde);
+		ps.setDouble(1, solde);
 		ps.setInt(2, idCompte);
 		ps.executeUpdate();
 		
@@ -143,6 +155,7 @@ public class Dao implements Idao {
 			}
 	
 	}
+	
 
 	@Override
 	public void supprimerCompte(Compte c) {
@@ -258,5 +271,6 @@ public class Dao implements Idao {
 	public void ajouterClient(Client cl, Conseiller c) {
 		System.out.println("J'ajoute un client � un conseiller");						
 	}
+	
 
 }

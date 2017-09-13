@@ -61,15 +61,15 @@ public class GerantImpl implements IGerant {
 	 * M�thode permettant � un g�rant de lire les caract�ristiques d'un compte bancaire
 	 */
 	@Override
-	public Compte lireCompte(Compte c) {
-		return dao.lireCompte(c);			
+	public Compte lireCompte(int idCompte) {
+		return dao.lireCompte(idCompte);			
 	}
 
 	/**
 	 * M�thode permettant � un g�rant de modifier les caract�ristiques d'un compte bancaire
 	 */
 	@Override
-	public void modifierCompte(int idCompte, float solde) {
+	public void modifierCompte(int idCompte, double solde) {
 		dao.modifierCompte(idCompte, solde);			
 	}
 

@@ -8,7 +8,7 @@ public class Compte {
 	private int idCompte;
 	
 	private long numCompte;
-	private float solde;
+	private double solde;
 	private String dateOuverture;
 	private Client client;
 	private CB carte;
@@ -32,10 +32,10 @@ public class Compte {
 	public void setNumCompte(long numCompte) {
 		this.numCompte = numCompte;
 	}
-	public float getSolde() {
+	public double getSolde() {
 		return solde;
 	}
-	public void setSolde(Float solde) {
+	public void setSolde(double solde) {
 		this.solde = solde;
 	}
 	public String getDateOuverture() {
@@ -50,5 +50,11 @@ public class Compte {
 	public void setIdCompte(int idCompte) {
 		this.idCompte = idCompte;
 	}
+	@Override
+	public String toString() {
+		return "Compte [idCompte=" + idCompte + ", numCompte=" + numCompte + ", solde=" + solde + ", dateOuverture="
+				+ dateOuverture + ", client=" + client + ", carte=" + carte + "]";
+	}
+	
 	
 }

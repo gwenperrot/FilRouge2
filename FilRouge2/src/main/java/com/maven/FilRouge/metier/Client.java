@@ -81,6 +81,7 @@ public abstract class Client {
 		return "Client [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codePostal=" + codePostal
 				+ ", ville=" + ville + ", telephone=" + telephone + ", conseiller=" + conseiller + ", comptes="
 				+ comptes + "]";
+		
 	}
 		
 }

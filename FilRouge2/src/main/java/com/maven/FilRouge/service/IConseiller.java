@@ -18,8 +18,8 @@ public interface IConseiller {
 	public void supprimerClient(Client c);
 	
 	public void creerCompte(Compte c);
-	public Compte lireCompte(Compte c);
-	public void modifierCompte(int idCompte, float solde);
+	public Compte lireCompte(int idCompte);
+	public void modifierCompte(int idCompte, double solde);
 	public void supprimerCompte(Compte c);
 	public void faireVirement(Compte c);
 	public void simuler();

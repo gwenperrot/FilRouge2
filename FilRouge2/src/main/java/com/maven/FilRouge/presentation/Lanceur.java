@@ -16,9 +16,14 @@ public class Lanceur {
 		IConseiller ic = new ConseillerImpl();
 		IGerant ig = new GerantImpl();
 		
-		Compte c = new Compte();
-		c.setNumCompte(234234);
-		c.setDateOuverture("12/12/12");
+		//Compte c = new Compte();
+		//c.setNumCompte(234234);
+		//c.setDateOuverture("12/12/12");
+		//c.setSolde((float)5000.0);
+		//ic.creerCompte(c);
+		
+		//System.out.println(ic.lireCompte(1));
+		
 		
 		/*Fenetre f = new Fenetre();
 		f.setVisible(true);*/

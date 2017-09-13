@@ -298,7 +298,7 @@ public class Dao implements Idao {
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
 			//4- preparer en envoyer la requete 
-			String requete = "SELECT* FROM employe WHERE id=? ";
+			String requete = "SELECT * FROM employe WHERE id=? ";
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
 			ps.setLong(1, id);
@@ -310,9 +310,12 @@ public class Dao implements Idao {
 			c.setNom(rs.getString("nom"));
 			c.setPrenom(rs.getString("prenom"));
 			c.setLogin(rs.getString("login"));
+			c.setMdp(rs.getString("mdp"));
+			c.setEmail(rs.getString("email"));
 			
 
 			//6- liberer les ressources
+			rs.close();
 			ps.close();
 			conn.close();
 		} catch (Exception e) {
@@ -324,8 +327,37 @@ public class Dao implements Idao {
 	}
 
 	@Override
-	public void modifierConseiller(Conseiller c) {
+	public void modifierConseiller(int id, String nom, String prenom, String login, String mdp, String email) {
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+	        String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+	        String login2 = "root";
+	        String mdp2 = "";
 			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login2, mdp2);
+			//4- preparer en envoyer la requete 
+			String requete = "UPDATE employe set nom=?, prenom=?, login=?, mdp=?, email=? WHERE idCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setString(1, nom);
+			ps.setString(2, prenom);
+			ps.setString(3, login);
+			ps.setString(4, mdp);
+			ps.setString(5, email);
+			
+
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}	
 	}
 
 	@Override

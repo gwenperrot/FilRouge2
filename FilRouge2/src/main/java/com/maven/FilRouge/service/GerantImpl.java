@@ -138,8 +138,8 @@ public class GerantImpl implements IGerant {
 	 * M�thode permettant � un g�rant de modifier les informations d'un conseiller
 	 */
 	@Override
-	public void modifierConseiller(Conseiller c) {
-		dao.modifierConseiller(c);			
+	public void modifierConseiller(int id, String nom, String prenom, String login, String mdp, String email) {
+		dao.modifierConseiller(id, nom, prenom, login, mdp, email);			
 	}
 
 	/**

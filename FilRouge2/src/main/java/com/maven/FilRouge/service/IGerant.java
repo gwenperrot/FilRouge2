@@ -13,7 +13,7 @@ public interface IGerant extends IConseiller {
 	
 	public void creerConseiller(Conseiller c);
 	public Conseiller lireConseiller(int id);
-	public void modifierConseiller(Conseiller c);
+	public void modifierConseiller(int id, String nom, String prenom, String login, String mdp, String email);
 	public void supprimerConseiller(Conseiller c);
 	public void attribuerAgence(Agence a, Employe e);
 	public void ajouterEmploye(Employe e, Agence a);

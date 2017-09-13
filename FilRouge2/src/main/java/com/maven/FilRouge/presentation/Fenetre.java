@@ -34,36 +34,36 @@ public class Fenetre extends JFrame {
 	private IGerant ig = new GerantImpl();
 	
 	//Structure onglets
-	JTabbedPane ongletgestionclient = new JTabbedPane();
-		private JPanel ongletcreerclient = new JPanel();
-		private JPanel ongletlireclient = new JPanel();
-		private JPanel ongletmodifierclient = new JPanel();
-		private JPanel ongletsupprimerclient = new JPanel();
-		private JPanel ongletattribuerconseiller= new JPanel();
+	JTabbedPane ongletGestionClient = new JTabbedPane();
+		private JPanel ongletCreerClient = new JPanel();
+		private JPanel ongletLireClient = new JPanel();
+		private JPanel ongletModifierClient = new JPanel();
+		private JPanel ongletSupprimerClient = new JPanel();
+		private JPanel ongletAttribuerConseiller= new JPanel();
 
-	JTabbedPane ongletgestionconseiller = new JTabbedPane();
-		private JPanel ongletcreerconseiller = new JPanel();
-		private JPanel ongletlireconseiller = new JPanel();
-		private JPanel ongletmodifierconseiller = new JPanel();
-		private JPanel ongletsupprimerconseiller = new JPanel();
-		private JPanel ongletattribueragence = new JPanel();
-		private JPanel ongletajouteremploye = new JPanel();
-		private JPanel ongletattribuergerant = new JPanel();
-		private JPanel ongletajouterconseiller = new JPanel();
-		private JPanel ongletajouterclient= new JPanel();
+	JTabbedPane ongletGestionConseiller = new JTabbedPane();
+		private JPanel ongletCreerConseiller = new JPanel();
+		private JPanel ongletLireConseiller = new JPanel();
+		private JPanel ongletModifierConseiller = new JPanel();
+		private JPanel ongletSupprimerConseiller = new JPanel();
+		private JPanel ongletAttribuerAgence = new JPanel();
+		private JPanel ongletAjouterEmploye = new JPanel();
+		private JPanel ongletAttribuerGerant = new JPanel();
+		private JPanel ongletAjouterConseiller = new JPanel();
+		private JPanel ongletAjouterClient= new JPanel();
 
-	JTabbedPane ongletgestioncompte = new JTabbedPane();
-		private JPanel ongletcreercompte = new JPanel();
-		private JPanel ongletlirecompte = new JPanel();
-		private JPanel ongletmodifiercompte = new JPanel();
-		private JPanel ongletsupprimercompte = new JPanel();
-		private JPanel ongletfairevirement = new JPanel();
-		private JPanel ongletsimuler= new JPanel();
-		private JPanel ongletplacerargent = new JPanel();
-		private JPanel ongletattribuerclient = new JPanel();
-		private JPanel ongletajoutercompte = new JPanel();
+	JTabbedPane ongletGestionCompte = new JTabbedPane();
+		private JPanel ongletCreerCompte = new JPanel();
+		private JPanel ongletLireCompte = new JPanel();
+		private JPanel ongletModifierCompte = new JPanel();
+		private JPanel ongletSupprimerCompte = new JPanel();
+		private JPanel ongletFaireVirement = new JPanel();
+		private JPanel ongletSimuler= new JPanel();
+		private JPanel ongletPlacerArgent = new JPanel();
+		private JPanel ongletAttribuerClient = new JPanel();
+		private JPanel ongletAjouterCompte = new JPanel();
 
-	private JPanel ongletaudition = new JPanel();	
+	private JPanel ongletAudition = new JPanel();	
 	
 	//Structure intra-onglets
 	//Gestion Client
@@ -157,106 +157,126 @@ public class Fenetre extends JFrame {
 		setResizable(true);//On autorise la fenêtre à être redimensionnée
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Un clic sur la croix arrête le processus d'affichage de la fenêtre
 		setLocationRelativeTo(null);//Pour centrer la fenêtre
-		//Création ongletgestionclient
-		ongletcreerclient.add(tnomCl);
-		ongletcreerclient.add(jtnomCl);
-		ongletcreerclient.add(tprenomCl);
-		ongletcreerclient.add(jtprenomCl);
-		ongletcreerclient.add(tadresseCl);
-		ongletcreerclient.add(jtadresseCl);
-		ongletcreerclient.add(tcodePostalCl);
-		ongletcreerclient.add(jtcodePostalCl);
-		ongletcreerclient.add(tvilleCl);
-		ongletcreerclient.add(jtvilleCl);
-		ongletcreerclient.add(ttelephoneCl);
-		ongletcreerclient.add(jttelephoneCl);
-		ongletcreerclient.add(bCl);
-		ongletcreerclient.add(jeventCl);
-		ongletgestionclient.addTab("Créer", ongletcreerclient);
-		ongletgestionclient.addTab("Lire", ongletlireclient);
-		ongletgestionclient.addTab("Modifier", ongletmodifierclient);
-		ongletgestionclient.addTab("Supprimer", ongletsupprimerclient);
-		ongletgestionclient.addTab("Attribuer Conseiller", ongletattribuerconseiller);
+		//Création ongletGestionClient
+		ongletCreerClient.add(tnomCl);
+		ongletCreerClient.add(jtnomCl);
+		ongletCreerClient.add(tprenomCl);
+		ongletCreerClient.add(jtprenomCl);
+		ongletCreerClient.add(tadresseCl);
+		ongletCreerClient.add(jtadresseCl);
+		ongletCreerClient.add(tcodePostalCl);
+		ongletCreerClient.add(jtcodePostalCl);
+		ongletCreerClient.add(tvilleCl);
+		ongletCreerClient.add(jtvilleCl);
+		ongletCreerClient.add(ttelephoneCl);
+		ongletCreerClient.add(jttelephoneCl);
+		ongletCreerClient.add(bCl);
+		ongletCreerClient.add(jeventCl);
+		ongletGestionClient.addTab("Créer", ongletCreerClient);
+		ongletGestionClient.addTab("Lire", ongletLireClient);
+		ongletGestionClient.addTab("Modifier", ongletModifierClient);
+		ongletGestionClient.addTab("Supprimer", ongletSupprimerClient);
+		ongletGestionClient.addTab("Attribuer Conseiller", ongletAttribuerConseiller);
 
-		//Création ongletgestionconseiller
+		//Création ongletGestionConseiller
 			//Création ongletcréerconseiller
-		ongletcreerconseiller.add(tnomCo);
-		ongletcreerconseiller.add(jtnomCo);
-		ongletcreerconseiller.add(tprenomCo);
-		ongletcreerconseiller.add(jtprenomCo);
-		ongletcreerconseiller.add(tloginCo);
-		ongletcreerconseiller.add(jtloginCo);
-		ongletcreerconseiller.add(tmdpCo);
-		ongletcreerconseiller.add(jtmdpCo);
-		ongletcreerconseiller.add(temailCo);
-		ongletcreerconseiller.add(jtemailCo);
-		ongletcreerconseiller.add(bCo);
-		ongletcreerconseiller.add(jeventCo);
-		ongletgestionconseiller.addTab("Créer", ongletcreerconseiller);
-		ongletgestionconseiller.addTab("Lire", ongletlireconseiller);
-		ongletgestionconseiller.addTab("Modifier", ongletmodifierconseiller);
-		ongletgestionconseiller.addTab("Supprimer", ongletsupprimerconseiller);
-		ongletgestionconseiller.addTab("Attribuer Agence", ongletattribueragence);
-		ongletgestionconseiller.addTab("Ajouter employé", ongletajouterconseiller);
-		ongletgestionconseiller.addTab("Attribuer Gérant", ongletattribuergerant);
-		ongletgestionconseiller.addTab("Ajouter Conseiller", ongletajouterconseiller);
-		ongletgestionconseiller.addTab("Ajouter Client", ongletajouterclient);
+		ongletCreerConseiller.add(tnomCo);
+		ongletCreerConseiller.add(jtnomCo);
+		ongletCreerConseiller.add(tprenomCo);
+		ongletCreerConseiller.add(jtprenomCo);
+		ongletCreerConseiller.add(tloginCo);
+		ongletCreerConseiller.add(jtloginCo);
+		ongletCreerConseiller.add(tmdpCo);
+		ongletCreerConseiller.add(jtmdpCo);
+		ongletCreerConseiller.add(temailCo);
+		ongletCreerConseiller.add(jtemailCo);
+		ongletCreerConseiller.add(bCo);
+		ongletCreerConseiller.add(jeventCo);
+		ongletGestionConseiller.addTab("Créer", ongletCreerConseiller);
+		ongletGestionConseiller.addTab("Lire", ongletLireConseiller);
+		ongletGestionConseiller.addTab("Modifier", ongletModifierConseiller);
+		ongletGestionConseiller.addTab("Supprimer", ongletSupprimerConseiller);
+		ongletGestionConseiller.addTab("Attribuer Agence", ongletAttribuerAgence);
+		ongletGestionConseiller.addTab("Ajouter employé", ongletAjouterConseiller);
+		ongletGestionConseiller.addTab("Attribuer Gérant", ongletAttribuerGerant);
+		ongletGestionConseiller.addTab("Ajouter Conseiller", ongletAjouterConseiller);
+		ongletGestionConseiller.addTab("Ajouter Client", ongletAjouterClient);
 		
-		//Création ongletgestioncompte
+		//Création ongletGestionCompte
 			//Création ongletcréercompte
-		ongletcreercompte.add(tnumCp);
-		ongletcreercompte.add(jtnumCp);
-		ongletcreercompte.add(tsoldeCp);
-		ongletcreercompte.add(jtsoldeCp);
-		ongletcreercompte.add(tdateOuvertureCp);
-		ongletcreercompte.add(jtdateOuvertureCp);
-		ongletcreercompte.add(tdecouvertCp);
-		ongletcreercompte.add(jtdecouvertCp);
-		ongletcreercompte.add(ttauxCp);
-		ongletcreercompte.add(jttauxCp);
-		ongletcreercompte.add(bCp);
-		ongletcreercompte.add(jeventCp);
-			//Création ongletlirecompte
-		ongletlirecompte.add(tidCp1);
-		ongletlirecompte.add(jtidCp1);
-		ongletlirecompte.add(tnumCp1);
-		ongletlirecompte.add(jtnumCp1);
-		ongletlirecompte.add(bCp1);
-		ongletlirecompte.add(jeventCp1);
-			//Création ongletmodifiercompte
-		ongletmodifiercompte.add(tidCp2);
-		ongletmodifiercompte.add(jtidCp2);
-		ongletmodifiercompte.add(tnumCp2);
-		ongletmodifiercompte.add(jtnumCp2);
-		ongletmodifiercompte.add(tsoldeCp2);
-		ongletmodifiercompte.add(jtsoldeCp2);
-		ongletmodifiercompte.add(tdateOuvertureCp2);
-		ongletmodifiercompte.add(jtdateOuvertureCp2);
-		ongletmodifiercompte.add(tdecouvertCp2);
-		ongletmodifiercompte.add(jtdecouvertCp2);
-		ongletmodifiercompte.add(ttauxCp2);
-		ongletmodifiercompte.add(jttauxCp2);
-		ongletmodifiercompte.add(bCp2);
-		ongletmodifiercompte.add(jeventCp2);
-			//Création ongletsupprimercompte
-		ongletsupprimercompte.add(tidCp3);
-		ongletsupprimercompte.add(jtidCp3);
-		ongletsupprimercompte.add(tnumCp3);
-		ongletsupprimercompte.add(jtnumCp3);
-		ongletsupprimercompte.add(bCp3);
-		ongletsupprimercompte.add(jeventCp3);
+		ongletCreerCompte.add(tnumCp);
+		ongletCreerCompte.add(jtnumCp);
+		ongletCreerCompte.add(tsoldeCp);
+		ongletCreerCompte.add(jtsoldeCp);
+		ongletCreerCompte.add(tdateOuvertureCp);
+		ongletCreerCompte.add(jtdateOuvertureCp);
+		ongletCreerCompte.add(tdecouvertCp);
+		ongletCreerCompte.add(jtdecouvertCp);
+		ongletCreerCompte.add(ttauxCp);
+		ongletCreerCompte.add(jttauxCp);
+		ongletCreerCompte.add(bCp);
+		ongletCreerCompte.add(jeventCp);
+			//Création ongletLireCompte
+		JPanel ongletLireCompten = new JPanel();
+		JPanel ongletLireComptec = new JPanel();
+		JPanel ongletLireComptes = new JPanel();
+		ongletLireCompte.setLayout(new BorderLayout());
+		ongletLireCompten.add(tidCp1);
+		ongletLireCompten.add(jtidCp1);
+		ongletLireCompten.add(tnumCp1);
+		ongletLireCompten.add(jtnumCp1);
+		ongletLireCompten.add(bCp1);
+		ongletLireComptes.add(jeventCp1);
+		ongletLireCompte.add(ongletLireCompten, BorderLayout.NORTH);
+		ongletLireCompte.add(ongletLireComptec, BorderLayout.CENTER);
+		ongletLireCompte.add(ongletLireComptes, BorderLayout.SOUTH);
+			//Création ongletModifierCompte
+		JPanel ongletModifierCompten = new JPanel();
+		JPanel ongletModifierComptec = new JPanel();
+		JPanel ongletModifierComptes = new JPanel();
+		ongletModifierCompte.setLayout(new BorderLayout());
+		ongletModifierCompten.add(tidCp2);
+		ongletModifierCompten.add(jtidCp2);
+		ongletModifierCompten.add(tnumCp2);
+		ongletModifierCompten.add(jtnumCp2);
+		ongletModifierComptec.add(tsoldeCp2);
+		ongletModifierComptec.add(jtsoldeCp2);
+		ongletModifierComptec.add(tdecouvertCp2);
+		ongletModifierComptec.add(jtdecouvertCp2);
+		ongletModifierComptec.add(ttauxCp2);
+		ongletModifierComptec.add(jttauxCp2);
+		ongletModifierComptec.add(bCp2);
+		ongletModifierComptes.add(jeventCp2);
+		ongletModifierCompte.add(ongletModifierCompten, BorderLayout.NORTH);
+		ongletModifierCompte.add(ongletModifierComptec, BorderLayout.CENTER);
+		ongletModifierCompte.add(ongletModifierComptes, BorderLayout.SOUTH);
+
+			//Création ongletSupprimerCompte
+		JPanel ongletSupprimerCompten = new JPanel();
+		JPanel ongletSupprimerComptec = new JPanel();
+		JPanel ongletSupprimerComptes = new JPanel();
+		ongletSupprimerCompte.setLayout(new BorderLayout());
+		ongletSupprimerCompten.add(tidCp3);
+		ongletSupprimerCompten.add(jtidCp3);
+		ongletSupprimerCompten.add(tnumCp3);
+		ongletSupprimerCompten.add(jtnumCp3);
+		ongletSupprimerCompten.add(bCp3);
+		ongletSupprimerComptes.add(jeventCp3);
+		ongletSupprimerCompte.add(ongletSupprimerCompten, BorderLayout.NORTH);
+		ongletSupprimerCompte.add(ongletSupprimerComptec, BorderLayout.CENTER);
+		ongletSupprimerCompte.add(ongletSupprimerComptes, BorderLayout.SOUTH);
 			//Ajout des onglets du compte
-		ongletgestioncompte.addTab("Créer", ongletcreercompte);
-		ongletgestioncompte.addTab("Lire", ongletlirecompte);
-		ongletgestioncompte.addTab("Modifier", ongletmodifiercompte);
-		ongletgestioncompte.addTab("Supprimer", ongletsupprimercompte);
-		ongletgestioncompte.addTab("Faire Virement", ongletfairevirement);
-		ongletgestioncompte.addTab("Simuler", ongletsimuler);
-		ongletgestioncompte.addTab("Placer Bourse", ongletplacerargent);
-		ongletgestioncompte.addTab("Attribuer Client", ongletattribuerclient);
-		ongletgestioncompte.addTab("Ajouter Compte", ongletajoutercompte);
+		ongletGestionCompte.addTab("Créer", ongletCreerCompte);
+		ongletGestionCompte.addTab("Lire", ongletLireCompte);
+		ongletGestionCompte.addTab("Modifier", ongletModifierCompte);
+		ongletGestionCompte.addTab("Supprimer", ongletSupprimerCompte);
+		ongletGestionCompte.addTab("Faire Virement", ongletFaireVirement);
+		ongletGestionCompte.addTab("Simuler", ongletSimuler);
+		ongletGestionCompte.addTab("Placer Bourse", ongletPlacerArgent);
+		ongletGestionCompte.addTab("Attribuer Client", ongletAttribuerClient);
+		ongletGestionCompte.addTab("Ajouter Compte", ongletAjouterCompte);
 		/*
-		//Création ongletaudition
+		//Création ongletAudition
 	    onglet4.setLayout(new BorderLayout());
 		onglet4h.add(tmc4);
 		onglet4h.add(jtmc4);
@@ -269,10 +289,10 @@ public class Fenetre extends JFrame {
 		*/
 		//Les onglets
 		JTabbedPane onglets = new JTabbedPane();
-		onglets.addTab("Gestion Client", ongletgestionclient);
-		onglets.addTab("Gestion Conseiller", ongletgestionconseiller);
-		onglets.addTab("Gestion Compte", ongletgestioncompte);
-		onglets.addTab("Audition", ongletaudition);
+		onglets.addTab("Gestion Client", ongletGestionClient);
+		onglets.addTab("Gestion Conseiller", ongletGestionConseiller);
+		onglets.addTab("Gestion Compte", ongletGestionCompte);
+		onglets.addTab("Audition", ongletAudition);
 		
 		bCl.addActionListener(new ActionListener() {
 			@Override

@@ -31,7 +31,7 @@ public interface Idao {
 	
 	public void creerCompte(Compte c);
 	public Compte lireCompte(int idCompte);
-	public void modifierCompte(Compte c);
+	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne);
 	public void supprimerCompte(int idCompte);
 	public Compte getCompte(int idCompte);
 	public void faireVirement(Compte c);

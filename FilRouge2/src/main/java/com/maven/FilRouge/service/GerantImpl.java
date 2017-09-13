@@ -69,8 +69,8 @@ public class GerantImpl implements IGerant {
 	 * M�thode permettant � un g�rant de modifier les caract�ristiques d'un compte bancaire
 	 */
 	@Override
-	public void modifierCompte(Compte c) {
-		dao.modifierCompte(c);			
+	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
+		dao.modifierCompte(idCompte, solde, decouvert, tauxEpargne);			
 	}
 
 	/**

@@ -125,7 +125,7 @@ public class Dao implements Idao {
 	}
 
 	@Override
-	public void modifierCompte(Compte c) {
+	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
 		
 		try {
 		//1- charger le pilote
@@ -141,9 +141,13 @@ public class Dao implements Idao {
 		String requete = "UPDATE compte set solde=?, decouvert=?, tauxEpargne=? WHERE idCompte=? ";
 		
 		PreparedStatement ps = conn.prepareStatement(requete);
+		ps.setInt(4, idCompte);
 		
-		ps.setDouble(1, );
-		ps.setInt(2, );
+		ps.setDouble(1, solde);
+		
+		
+		ps.setInt(2, decouvert);
+		ps.setFloat(3, tauxEpargne);
 		ps.executeUpdate();
 		
 		ps.close();

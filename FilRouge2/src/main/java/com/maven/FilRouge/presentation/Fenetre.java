@@ -1,6 +1,7 @@
 package com.maven.FilRouge.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,9 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.maven.FilRouge.metier.Client;
@@ -35,14 +34,14 @@ public class Fenetre extends JFrame {
 	private IGerant ig = new GerantImpl();
 	
 	//Structure onglets
-	private JPanel ongletgestionclient = new JPanel();
+	JTabbedPane ongletgestionclient = new JTabbedPane();
 		private JPanel ongletcreerclient = new JPanel();
 		private JPanel ongletlireclient = new JPanel();
 		private JPanel ongletmodifierclient = new JPanel();
 		private JPanel ongletsupprimerclient = new JPanel();
 		private JPanel ongletattribuerconseiller= new JPanel();
 
-	private JPanel ongletgestionconseiller = new JPanel();
+	JTabbedPane ongletgestionconseiller = new JTabbedPane();
 		private JPanel ongletcreerconseiller = new JPanel();
 		private JPanel ongletlireconseiller = new JPanel();
 		private JPanel ongletmodifierconseiller = new JPanel();
@@ -53,7 +52,7 @@ public class Fenetre extends JFrame {
 		private JPanel ongletajouterconseiller = new JPanel();
 		private JPanel ongletajouterclient= new JPanel();
 
-	private JPanel ongletgestioncompte = new JPanel();
+	JTabbedPane ongletgestioncompte = new JTabbedPane();
 		private JPanel ongletcreercompte = new JPanel();
 		private JPanel ongletlirecompte = new JPanel();
 		private JPanel ongletmodifiercompte = new JPanel();
@@ -113,7 +112,7 @@ public class Fenetre extends JFrame {
 	private JTextField jtdecouvertCp = new JTextField(12);
 	private JTextField jttauxCp = new JTextField(12);
 	private JButton bCp = new JButton("Valider");
-		//Gestion Compte - Modifier
+		//Gestion Compte - Lire
 	private JLabel tidCp1 = new JLabel("ID");
 	private JLabel tnumCp1 = new JLabel("Numéro");
 	private JLabel tsoldeCp1 = new JLabel("Solde");
@@ -128,7 +127,7 @@ public class Fenetre extends JFrame {
 	private JTextField jtdecouvertCp1 = new JTextField(12);
 	private JTextField jttauxCp1 = new JTextField(12);
 	private JButton bCp1 = new JButton("Valider");
-		//Gestion Compte - Lire
+		//Gestion Compte - Modifier
 	private JLabel tidCp2 = new JLabel("ID");
 	private JLabel tnumCp2 = new JLabel("Numéro");
 	private JLabel tsoldeCp2 = new JLabel("Solde");
@@ -172,11 +171,11 @@ public class Fenetre extends JFrame {
 		ongletcreerclient.add(jttelephoneCl);
 		ongletcreerclient.add(bCl);
 		ongletcreerclient.add(jeventCl);
-		JTabbedPane ongletgestionclient = new JTabbedPane();
 		ongletgestionclient.addTab("Créer", ongletcreerclient);
 		ongletgestionclient.addTab("Lire", ongletlireclient);
 		ongletgestionclient.addTab("Modifier", ongletmodifierclient);
 		ongletgestionclient.addTab("Supprimer", ongletsupprimerclient);
+		ongletgestionclient.addTab("Attribuer Conseiller", ongletattribuerconseiller);
 
 		//Création ongletgestionconseiller
 			//Création ongletcréerconseiller
@@ -192,7 +191,6 @@ public class Fenetre extends JFrame {
 		ongletcreerconseiller.add(jtemailCo);
 		ongletcreerconseiller.add(bCo);
 		ongletcreerconseiller.add(jeventCo);
-		JTabbedPane ongletgestionconseiller = new JTabbedPane();
 		ongletgestionconseiller.addTab("Créer", ongletcreerconseiller);
 		ongletgestionconseiller.addTab("Lire", ongletlireconseiller);
 		ongletgestionconseiller.addTab("Modifier", ongletmodifierconseiller);
@@ -201,6 +199,7 @@ public class Fenetre extends JFrame {
 		ongletgestionconseiller.addTab("Ajouter employé", ongletajouterconseiller);
 		ongletgestionconseiller.addTab("Attribuer Gérant", ongletattribuergerant);
 		ongletgestionconseiller.addTab("Ajouter Conseiller", ongletajouterconseiller);
+		ongletgestionconseiller.addTab("Ajouter Client", ongletajouterclient);
 		
 		//Création ongletgestioncompte
 			//Création ongletcréercompte
@@ -216,45 +215,43 @@ public class Fenetre extends JFrame {
 		ongletcreercompte.add(jttauxCp);
 		ongletcreercompte.add(bCp);
 		ongletcreercompte.add(jeventCp);
-			//Création ongletmodifiercompte
-		ongletmodifiercompte.add(tidCp1);
-		ongletmodifiercompte.add(tnumCp1);
-		ongletmodifiercompte.add(jtnumCp1);
-		ongletmodifiercompte.add(tsoldeCp1);
-		ongletmodifiercompte.add(jtsoldeCp1);
-		ongletmodifiercompte.add(tdateOuvertureCp1);
-		ongletmodifiercompte.add(jtdateOuvertureCp1);
-		ongletmodifiercompte.add(tdecouvertCp1);
-		ongletmodifiercompte.add(jtdecouvertCp1);
-		ongletmodifiercompte.add(ttauxCp1);
-		ongletmodifiercompte.add(jttauxCp1);
-		ongletmodifiercompte.add(bCp1);
-		ongletmodifiercompte.add(jeventCp1);
 			//Création ongletlirecompte
-		ongletlirecompte.add(tidCp2);
-		ongletlirecompte.add(tnumCp2);
-		ongletlirecompte.add(jtnumCp2);
-		ongletlirecompte.add(tsoldeCp2);
-		ongletlirecompte.add(jtsoldeCp2);
-		ongletlirecompte.add(tdateOuvertureCp2);
-		ongletlirecompte.add(jtdateOuvertureCp2);
-		ongletlirecompte.add(tdecouvertCp2);
-		ongletlirecompte.add(jtdecouvertCp2);
-		ongletlirecompte.add(ttauxCp2);
-		ongletlirecompte.add(jttauxCp2);
-		ongletlirecompte.add(bCp2);
-		ongletlirecompte.add(jeventCp2);
+		ongletlirecompte.add(tidCp1);
+		ongletlirecompte.add(jtidCp1);
+		ongletlirecompte.add(tnumCp1);
+		ongletlirecompte.add(jtnumCp1);
+		ongletlirecompte.add(bCp1);
+		ongletlirecompte.add(jeventCp1);
+			//Création ongletmodifiercompte
+		ongletmodifiercompte.add(tidCp2);
+		ongletmodifiercompte.add(jtidCp2);
+		ongletmodifiercompte.add(tnumCp2);
+		ongletmodifiercompte.add(jtnumCp2);
+		ongletmodifiercompte.add(tsoldeCp2);
+		ongletmodifiercompte.add(jtsoldeCp2);
+		ongletmodifiercompte.add(tdateOuvertureCp2);
+		ongletmodifiercompte.add(jtdateOuvertureCp2);
+		ongletmodifiercompte.add(tdecouvertCp2);
+		ongletmodifiercompte.add(jtdecouvertCp2);
+		ongletmodifiercompte.add(ttauxCp2);
+		ongletmodifiercompte.add(jttauxCp2);
+		ongletmodifiercompte.add(bCp2);
+		ongletmodifiercompte.add(jeventCp2);
 			//Création ongletsupprimercompte
 		ongletsupprimercompte.add(tidCp3);
 		ongletsupprimercompte.add(jtidCp3);
 		ongletsupprimercompte.add(tnumCp3);
 		ongletsupprimercompte.add(jtnumCp3);
 			//Ajout des onglets du compte
-		JTabbedPane ongletgestioncompte = new JTabbedPane();
 		ongletgestioncompte.addTab("Créer", ongletcreercompte);
 		ongletgestioncompte.addTab("Lire", ongletlirecompte);
 		ongletgestioncompte.addTab("Modifier", ongletmodifiercompte);
 		ongletgestioncompte.addTab("Supprimer", ongletsupprimercompte);
+		ongletgestioncompte.addTab("Faire Virement", ongletfairevirement);
+		ongletgestioncompte.addTab("Simuler", ongletsimuler);
+		ongletgestioncompte.addTab("Placer Bourse", ongletplacerargent);
+		ongletgestioncompte.addTab("Attribuer Client", ongletattribuerclient);
+		ongletgestioncompte.addTab("Ajouter Compte", ongletajoutercompte);
 		/*
 		//Création ongletaudition
 	    onglet4.setLayout(new BorderLayout());
@@ -336,18 +333,10 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
-				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
-				c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
-				c.setDateOuverture(jtdateOuvertureCp.getText());
-				((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
-				((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
-				ic.modifierCompte(c.getIdCompte(), c.getSolde());
-				jtnumCp.setText("");
-				jtsoldeCp.setText("");
-				jtdateOuvertureCp.setText("");
-				jtdecouvertCp.setText("");
-				jttauxCp.setText("");
-				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été créé");
+				c = ic.getCompte(Integer.parseInt(jtidCp1.getText()));
+				ic.lireCompte(c);
+				jtidCp1.setText("");
+				jeventCp1.setText("Compte n° "+jtnumCp.getText()+" de "+c.getNumCompte() );
 			}
 		});
 		
@@ -360,7 +349,7 @@ public class Fenetre extends JFrame {
 				c.setDateOuverture(jtdateOuvertureCp.getText());
 				((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
 				((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
-				ic.lireCompte(c);
+				ic.modifierCompte(c.getIdCompte(), c.getSolde());
 				jtnumCp.setText("");
 				jtsoldeCp.setText("");
 				jtdateOuvertureCp.setText("");

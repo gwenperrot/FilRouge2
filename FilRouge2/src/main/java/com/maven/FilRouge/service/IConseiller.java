@@ -21,6 +21,7 @@ public interface IConseiller {
 	public Compte lireCompte(int idCompte);
 	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne);
 	public void supprimerCompte(int idCompte);
+	public Compte getCompte(int idCompte);
 	public void faireVirement(Compte c);
 	public void simuler();
 	public void placerArgent(float montant, Compte c);

@@ -333,8 +333,7 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
-				c = ic.getCompte(Integer.parseInt(jtidCp1.getText()));
-				ic.lireCompte(c);
+				ic.lireCompte(Integer.parseInt(jtidCp1.getText()));
 				jtidCp1.setText("");
 				jeventCp1.setText("Compte n° "+jtnumCp.getText()+" de "+c.getNumCompte() );
 			}
@@ -344,8 +343,11 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
-				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
-				c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
+				c = ic.getCompte(Integer.parseInt(jtidCp3.getText()));
+				if(jtidCp3.getText()==null)
+					c.setSolde(Float.parseFloat(jtsoldeCp2.getText()));
+				else c.setSolde(0.01);
+
 				c.setDateOuverture(jtdateOuvertureCp.getText());
 				((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
 				((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
@@ -363,9 +365,9 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
-				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
-				ic.supprimerCompte(c);
-				jtnumCp.setText("");
+				c = ic.getCompte(Integer.parseInt(jtidCp3.getText()));
+				ic.supprimerCompte(Integer.parseInt(jtidCp3.getText()));
+				jtidCp3.setText("");
 				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été supprimé");
 			}
 		});

@@ -143,5 +143,10 @@ public class ConseillerImpl implements IConseiller {
 	public void ajouterClient(Client cl, Conseiller c) {
 		dao.ajouterClient(cl, c);
 	}
+
+	@Override
+	public Compte getCompte(int idCompte) {
+		return dao.getCompte(idCompte);
+	}
 	
 }

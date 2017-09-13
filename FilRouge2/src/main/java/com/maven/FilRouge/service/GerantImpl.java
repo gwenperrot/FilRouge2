@@ -208,5 +208,10 @@ public class GerantImpl implements IGerant {
 	public void ajouterConseiller(Conseiller c, Gerant g) {
 		dao.ajouterConseiller(c, g);
 	}
+
+	@Override
+	public Compte getCompte(int idCompte) {
+		return dao.getCompte(idCompte);
+	}
 	
 }

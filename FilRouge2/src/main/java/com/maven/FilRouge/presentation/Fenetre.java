@@ -341,7 +341,7 @@ public class Fenetre extends JFrame {
 				c.setDateOuverture(jtdateOuvertureCp.getText());
 				((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
 				((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
-				ic.modifierCompte(c);
+				ic.modifierCompte(c.getIdCompte(), c.getSolde());
 				jtnumCp.setText("");
 				jtsoldeCp.setText("");
 				jtdateOuvertureCp.setText("");

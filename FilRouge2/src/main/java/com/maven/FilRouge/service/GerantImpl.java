@@ -125,8 +125,8 @@ public class GerantImpl implements IGerant {
 	 * M�thode permettant � un g�rant de lire les informations d'un conseiller
 	 */
 	@Override
-	public void lireConseiller(Conseiller c) {
-		dao.lireConseiller(c);		
+	public Conseiller lireConseiller(int id) {
+		return dao.lireConseiller(id);		
 	}
 	
 	/**

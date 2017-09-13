@@ -21,7 +21,7 @@ public interface Idao {
 	public void supprimerClient(Client c);
 	
 	public void creerConseiller(Conseiller c);
-	public void lireConseiller(Conseiller c);
+	public Conseiller lireConseiller(int id);
 	public void modifierConseiller(Conseiller c);
 	public void supprimerConseiller(Conseiller c);
 	public void attribuerAgence(Agence a, Employe e);

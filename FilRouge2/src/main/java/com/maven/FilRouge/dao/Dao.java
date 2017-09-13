@@ -56,21 +56,21 @@ public class Dao implements Idao {
             Class.forName("com.mysql.jdbc.Driver");
 
             // 2- adresse de la BDD
-            String adresse = "jdbc:mysql://localhost:8889/proxybanque";
+            String adresse = "jdbc:mysql://192.168.1.97:8889/proxybanque";
             String login = "root";
-            String mdp = "root";
+            String mdp = "";
 
             // 3- Connection a la BDD
             Connection con = DriverManager.getConnection(adresse, login, mdp);
 
          // 4- Preparation et envoi de la requete
-            String requete = "INSERT INTO compte (numCompte, solde, dateOuverture, decouvert, tauxEpargne) VALUES(?,?,?,?,?)";
+            String requete = "INSERT INTO compte (numCompte, solde, dateOuverture) VALUES(?,?,?)";
             PreparedStatement ps = con.prepareStatement(requete);
             ps.setLong(1, c.getNumCompte());
             ps.setDouble(2, c.getSolde());
             ps.setString(3, c.getDateOuverture());
-            ps.setInt(4, ((CompteCourant)c).getDecouvert());
-            ps.setFloat(5, ((CompteEpargne)c).getTauxEpargne());
+            //ps.setInt(4, ((CompteCourant)c).getDecouvert());
+            //ps.setFloat(5, ((CompteEpargne)c).getTauxEpargne());
             
             ps.executeUpdate();
 
@@ -143,11 +143,13 @@ public class Dao implements Idao {
 		PreparedStatement ps = conn.prepareStatement(requete);
 		ps.setInt(4, idCompte);
 		
-		ps.setDouble(1, solde);
+		if(solde != 0.01)
+			ps.setDouble(1, solde);
+		if(decouvert != 999999998)
+			ps.setInt(2, decouvert);
+		if(tauxEpargne != 0.01f)
+			ps.setFloat(3, tauxEpargne);
 		
-		
-		ps.setInt(2, decouvert);
-		ps.setFloat(3, tauxEpargne);
 		ps.executeUpdate();
 		
 		ps.close();
@@ -219,17 +221,82 @@ public class Dao implements Idao {
 
 	@Override
 	public void creerConseiller(Conseiller c) {
-		System.out.println("Je cr�e un conseiller en BDD");	
+		try {
+            //  1-charger le pilote
+            Class.forName("com.mysql.jdbc.Driver");
+
+            // 2- adresse de la BDD
+            String adresse = "jdbc:mysql://localhost:8889/proxybanque";
+            String login = "root";
+            String mdp = "root";
+
+            // 3- Connection a la BDD
+            Connection con = DriverManager.getConnection(adresse, login, mdp);
+
+         // 4- Preparation et envoi de la requete
+            String requete = "INSERT INTO employe (nom, prenom, login, mdp, email) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(requete);
+            ps.setString(1, c.getNom());
+            ps.setString(2, c.getPrenom());
+            ps.setString(3, c.getLogin());
+            ps.setString(4, c.getMdp());
+            ps.setString(5, c.getEmail());
+
+            
+            ps.executeUpdate();
+
+            // 6- Liberation des ressources
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }	
 	}
 
 	@Override
-	public void lireConseiller(Conseiller c) {
-		System.out.println("Je lis un conseiller en BDD");	
+	public Conseiller lireConseiller(int id) {
+		Conseiller c = new Conseiller();
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+			String adresse="jdbc:mysql://localhost:8889/proxybanque";
+			String login="root";
+			String mdp="root";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "SELECT* FROM employe WHERE id=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setLong(1, id);
+			
+			//5- recuperer le resultat
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			c.setNom(rs.getString("nom"));
+			c.setPrenom(rs.getString("prenom"));
+			c.setLogin(rs.getString("login"));
+			
+
+			//6- liberer les ressources
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return c;	
 	}
 
 	@Override
 	public void modifierConseiller(Conseiller c) {
-		System.out.println("Je modifie un conseiller en BDD");	
+			
 	}
 
 	@Override

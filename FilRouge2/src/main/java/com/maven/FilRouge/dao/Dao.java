@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
 
 import com.maven.FilRouge.metier.Agence;
 import com.maven.FilRouge.metier.Client;
@@ -13,12 +11,6 @@ import com.maven.FilRouge.metier.Compte;
 import com.maven.FilRouge.metier.Conseiller;
 import com.maven.FilRouge.metier.Employe;
 import com.maven.FilRouge.metier.Gerant;
-import com.maven.FilRouge.service.AuditeurImpl;
-import com.maven.FilRouge.service.ConseillerImpl;
-import com.maven.FilRouge.service.GerantImpl;
-import com.maven.FilRouge.service.IAuditeur;
-import com.maven.FilRouge.service.IConseiller;
-import com.maven.FilRouge.service.IGerant;
 import com.maven.FilRouge.metier.CompteCourant;
 import com.maven.FilRouge.metier.CompteEpargne;
 /**
@@ -69,8 +61,6 @@ public class Dao implements Idao {
             ps.setLong(1, c.getNumCompte());
             ps.setDouble(2, c.getSolde());
             ps.setString(3, c.getDateOuverture());
-            //ps.setInt(4, ((CompteCourant)c).getDecouvert());
-            //ps.setFloat(5, ((CompteEpargne)c).getTauxEpargne());
             
             ps.executeUpdate();
 
@@ -79,16 +69,13 @@ public class Dao implements Idao {
             con.close();
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-		
-	
 	}
 
 	@Override
-	public Compte lireCompte(int idCompte) {
-		Compte c = new Compte();
+	public CompteCourant lireCompteCourant(int idCompte) {
+		CompteCourant c = new CompteCourant();
 		try {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
@@ -100,7 +87,7 @@ public class Dao implements Idao {
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
 			//4- preparer en envoyer la requete 
-			String requete = "SELECT* FROM compte WHERE idCompte=? ";
+			String requete = "SELECT * FROM compte WHERE idCompte=? ";
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
 			ps.setLong(1, idCompte);
@@ -110,8 +97,86 @@ public class Dao implements Idao {
 			
 			rs.next();
 			c.setNumCompte(rs.getLong("numCompte"));
-			c.setSolde(rs.getFloat("solde"));
 			c.setDateOuverture(rs.getString("dateOuverture"));
+			c.setSolde(rs.getDouble("solde"));
+			c.setDecouvert(rs.getInt("decouvert"));
+
+			//6- liberer les ressources
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return c;	
+	}
+	
+	@Override
+	public CompteCourant lireCompteCourant(long numCompte) {
+		CompteCourant c = new CompteCourant();
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "SELECT * FROM compte WHERE numCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setLong(1, numCompte);
+			
+			//5- recuperer le resultat
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			c.setNumCompte(rs.getLong("numCompte"));
+			c.setDateOuverture(rs.getString("dateOuverture"));
+			c.setSolde(rs.getDouble("solde"));
+			c.setDecouvert(rs.getInt("decouvert"));
+
+			//6- liberer les ressources
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return c;	
+	}
+
+	@Override
+	public CompteEpargne lireCompteEpargne(int idCompte) {
+		CompteEpargne c = new CompteEpargne();
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "SELECT * FROM compte WHERE idCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setLong(1, idCompte);
+			
+			//5- recuperer le resultat
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			c.setNumCompte(rs.getLong("numCompte"));
+			c.setDateOuverture(rs.getString("dateOuverture"));
+			c.setSolde(rs.getDouble("solde"));
+			c.setTauxEpargne(rs.getInt("tauxEpargne"));
 
 			//6- liberer les ressources
 			ps.close();
@@ -125,7 +190,46 @@ public class Dao implements Idao {
 	}
 	
 	@Override
-	public void modifierCompte(int idCompte, double solde) {	
+	public CompteEpargne lireCompteEpargne(long numCompte) {
+		CompteEpargne c = new CompteEpargne();
+		try {
+			//1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			//2- adresse de la base de donn�es
+            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
+            String login = "root";
+            String mdp = "";
+			
+			//3- connection a la base 
+			Connection conn = DriverManager.getConnection(adresse, login, mdp);
+			//4- preparer en envoyer la requete 
+			String requete = "SELECT * FROM compte WHERE numCompte=? ";
+			
+			PreparedStatement ps = conn.prepareStatement(requete);
+			ps.setLong(1, numCompte);
+			
+			//5- recuperer le resultat
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			c.setNumCompte(rs.getLong("numCompte"));
+			c.setDateOuverture(rs.getString("dateOuverture"));
+			c.setSolde(rs.getDouble("solde"));
+			c.setTauxEpargne(rs.getInt("tauxEpargne"));
+
+			//6- liberer les ressources
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return c;	
+	}
+		
+	@Override
+	public void modifierCompteCourant(long numCompte, double solde, int decouvert) {	
 		try {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
@@ -137,11 +241,12 @@ public class Dao implements Idao {
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
 			//4- preparer en envoyer la requete 
-			String requete = "UPDATE compte set solde=? WHERE idCompte=? ";
+			String requete = "UPDATE compte set solde=?, decouvert=? WHERE numCompte=? ";
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
 			ps.setDouble(1, solde);
-			ps.setInt(2, idCompte);
+			ps.setInt(2, decouvert);
+			ps.setLong(3, numCompte);
 
 			ps.executeUpdate();
 			
@@ -154,9 +259,9 @@ public class Dao implements Idao {
 		}
 		
 	}
-	
+		
 	@Override
-	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
+	public void modifierCompteEpargne(long numCompte, double solde, float tauxEpargne) {
 		
 		try {
 		//1- charger le pilote
@@ -169,17 +274,12 @@ public class Dao implements Idao {
 		//3- connection a la base 
 		Connection conn = DriverManager.getConnection(adresse, login, mdp);
 		//4- preparer en envoyer la requete 
-		String requete = "UPDATE compte set solde=?, decouvert=?, tauxEpargne=? WHERE idCompte=? ";
+		String requete = "UPDATE compte set solde=?, tauxEpargne=? WHERE numCompte=? ";
 		
 		PreparedStatement ps = conn.prepareStatement(requete);
-		ps.setInt(4, idCompte);
-		
-		if(solde != 0.01)
-			ps.setDouble(1, solde);
-		if(decouvert != 999999998)
-			ps.setInt(2, decouvert);
-		if(tauxEpargne != 0.01f)
-			ps.setFloat(3, tauxEpargne);
+		ps.setDouble(1, solde);
+		ps.setFloat(2, tauxEpargne);
+		ps.setLong(3, numCompte);	
 		
 		ps.executeUpdate();
 		
@@ -194,8 +294,7 @@ public class Dao implements Idao {
 	}
 	
 	@Override
-	public void supprimerCompte(int idCompte) {
-		Compte c = new Compte();
+	public void supprimerCompte(long numCompte) {
 		try {
 			//1- charger le pilote
 			Class.forName("com.mysql.jdbc.Driver");
@@ -207,22 +306,21 @@ public class Dao implements Idao {
 			//3- connection a la base 
 			Connection conn = DriverManager.getConnection(adresse, login, mdp);
 			//4- preparer en envoyer la requete 
-			String requete = "DELETE FROM compte Where idCompte=?";
+			String requete = "DELETE FROM compte Where numCompte=?";
 			
 			PreparedStatement ps = conn.prepareStatement(requete);
 			
-			ps.setInt(1, idCompte);
+			ps.setLong(1, numCompte);
 			ps.executeUpdate();
 			
 			ps.close();
 			conn.close();
 			
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
-
+	
 	@Override
 	public void faireVirement(Compte c) {
 		System.out.println("Je fais un virement depuis un compte en BDD");	
@@ -403,47 +501,6 @@ public class Dao implements Idao {
 	@Override
 	public void ajouterClient(Client cl, Conseiller c) {
 		System.out.println("J'ajoute un client � un conseiller");						
-	}
-
-	@Override
-	public Compte getCompte(int idCompte) {
-		Compte c = new Compte();
-		try {
-			//1- charger le pilote
-			Class.forName("com.mysql.jdbc.Driver");
-			//2- adresse de la base de donn�es
-            String adresse = "jdbc:mysql://127.0.0.1:3306/proxybanque";
-            String login = "root";
-            String mdp = "";
-			
-			//3- connection a la base 
-			Connection conn = DriverManager.getConnection(adresse, login, mdp);
-			//4- preparer en envoyer la requete 
-			String requete = "SELECT * FROM compte WHERE idCompte=? ";
-			
-			PreparedStatement ps = conn.prepareStatement(requete);
-			ps.setInt(1, idCompte);
-			
-			//5- recuperer le resultat
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-			c.setIdCompte(idCompte);
-			c.setNumCompte(rs.getLong("numCompte"));
-			c.setDateOuverture(rs.getString("dateOuverture"));
-			c.setSolde(rs.getDouble("solde"));
-			//((CompteCourant)c).setDecouvert(rs.getInt("decouvert"));
-			//((CompteEpargne)c).setTauxEpargne(rs.getFloat("tauxEpargne"));
-
-			//6- liberer les ressources
-			rs.close();
-			ps.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		return c;
 	}
 
 }

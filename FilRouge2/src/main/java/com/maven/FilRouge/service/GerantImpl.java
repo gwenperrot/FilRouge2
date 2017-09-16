@@ -5,6 +5,8 @@ import com.maven.FilRouge.dao.Idao;
 import com.maven.FilRouge.metier.Agence;
 import com.maven.FilRouge.metier.Client;
 import com.maven.FilRouge.metier.Compte;
+import com.maven.FilRouge.metier.CompteCourant;
+import com.maven.FilRouge.metier.CompteEpargne;
 import com.maven.FilRouge.metier.Conseiller;
 import com.maven.FilRouge.metier.Employe;
 import com.maven.FilRouge.metier.Gerant;
@@ -61,29 +63,46 @@ public class GerantImpl implements IGerant {
 	 * M�thode permettant � un g�rant de lire les caract�ristiques d'un compte bancaire
 	 */
 	@Override
-	public Compte lireCompte(int idCompte) {
-		return dao.lireCompte(idCompte);			
+	public CompteCourant lireCompteCourant(int idCompte) {
+		return dao.lireCompteCourant(idCompte);
+	}
+	
+	@Override
+	public CompteCourant lireCompteCourant(long numCompte) {
+		return dao.lireCompteCourant(numCompte);
+	}
+	
+	@Override
+	public CompteEpargne lireCompteEpargne(int idCompte) {
+		return dao.lireCompteEpargne(idCompte);
+	}
+	
+	@Override
+	public CompteEpargne lireCompteEpargne(long numCompte) {
+		return dao.lireCompteEpargne(numCompte);
 	}
 
 	/**
 	 * M�thode permettant � un g�rant de modifier les caract�ristiques d'un compte bancaire
 	 */
+
 	@Override
-	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne) {
-		dao.modifierCompte(idCompte, solde, decouvert, tauxEpargne);			
+	public void modifierCompteCourant(long numCompte, double solde, int decouvert) {
+		dao.modifierCompteCourant(numCompte, solde, decouvert);
 	}
-	
+
 	@Override
-	public void modifierCompte(int idCompte, double solde) {
-		dao.modifierCompte(idCompte, solde);			
+	public void modifierCompteEpargne(long numCompte, double solde, float tauxEpargne) {
+		dao.modifierCompteEpargne(numCompte, solde, tauxEpargne);
 	}
 
 	/**
 	 * M�thode permettant � un g�rant de supprimer un compte bancaire
 	 */
+	
 	@Override
-	public void supprimerCompte(int idCompte) {
-		dao.supprimerCompte(idCompte);			
+	public void supprimerCompte(long numCompte) {
+		dao.supprimerCompte(numCompte);		
 	}
 
 	/**
@@ -212,11 +231,6 @@ public class GerantImpl implements IGerant {
 	@Override
 	public void ajouterConseiller(Conseiller c, Gerant g) {
 		dao.ajouterConseiller(c, g);
-	}
-
-	@Override
-	public Compte getCompte(int idCompte) {
-		return dao.getCompte(idCompte);
 	}
 	
 }

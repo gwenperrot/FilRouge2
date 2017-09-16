@@ -1,7 +1,6 @@
 package com.maven.FilRouge.presentation;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.maven.FilRouge.metier.Client;
@@ -32,6 +33,9 @@ public class Fenetre extends JFrame {
 	private IAuditeur ia = new AuditeurImpl();
 	private IConseiller ic = new ConseillerImpl();
 	private IGerant ig = new GerantImpl();
+	private CompteCourantModele CCModele;
+	private CompteEpargneModele CEModele;
+	private JScrollPane jsp;
 	
 	//Structure onglets
 	JTabbedPane ongletGestionClient = new JTabbedPane();
@@ -115,30 +119,20 @@ public class Fenetre extends JFrame {
 		//Gestion Compte - Lire
 	private JLabel tidCp1 = new JLabel("ID");
 	private JLabel tnumCp1 = new JLabel("Numéro");
-	private JLabel tsoldeCp1 = new JLabel("Solde");
-	private JLabel tdateOuvertureCp1 = new JLabel("Date d'ouverture");
-	private JLabel tdecouvertCp1 = new JLabel("Découvert");
-	private JLabel ttauxCp1 = new JLabel("Taux d'épargne");
 	private JLabel jeventCp1 = new JLabel("");
 	private JTextField jtidCp1 = new JTextField(12);
 	private JTextField jtnumCp1 = new JTextField(12);
-	private JTextField jtsoldeCp1 = new JTextField(12);
-	private JTextField jtdateOuvertureCp1 = new JTextField(12);
-	private JTextField jtdecouvertCp1 = new JTextField(12);
-	private JTextField jttauxCp1 = new JTextField(12);
 	private JButton bCp1 = new JButton("Valider");
 		//Gestion Compte - Modifier
 	private JLabel tidCp2 = new JLabel("ID");
 	private JLabel tnumCp2 = new JLabel("Numéro");
 	private JLabel tsoldeCp2 = new JLabel("Solde");
-	private JLabel tdateOuvertureCp2 = new JLabel("Date d'ouverture");
 	private JLabel tdecouvertCp2 = new JLabel("Découvert");
 	private JLabel ttauxCp2 = new JLabel("Taux d'épargne");
 	private JLabel jeventCp2 = new JLabel("");
 	private JTextField jtidCp2 = new JTextField(12);
 	private JTextField jtnumCp2 = new JTextField(12);
 	private JTextField jtsoldeCp2 = new JTextField(12);
-	private JTextField jtdateOuvertureCp2 = new JTextField(12);
 	private JTextField jtdecouvertCp2 = new JTextField(12);
 	private JTextField jttauxCp2 = new JTextField(12);
 	private JButton bCp2 = new JButton("Valider");
@@ -218,7 +212,6 @@ public class Fenetre extends JFrame {
 		ongletCreerCompte.add(jeventCp);
 			//Création ongletLireCompte
 		JPanel ongletLireCompten = new JPanel();
-		JPanel ongletLireComptec = new JPanel();
 		JPanel ongletLireComptes = new JPanel();
 		ongletLireCompte.setLayout(new BorderLayout());
 		ongletLireCompten.add(tidCp1);
@@ -228,7 +221,6 @@ public class Fenetre extends JFrame {
 		ongletLireCompten.add(bCp1);
 		ongletLireComptes.add(jeventCp1);
 		ongletLireCompte.add(ongletLireCompten, BorderLayout.NORTH);
-		ongletLireCompte.add(ongletLireComptec, BorderLayout.CENTER);
 		ongletLireCompte.add(ongletLireComptes, BorderLayout.SOUTH);
 			//Création ongletModifierCompte
 		JPanel ongletModifierCompten = new JPanel();
@@ -336,29 +328,64 @@ public class Fenetre extends JFrame {
 		bCp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Compte c = new Compte();
-				c.setNumCompte(Integer.parseInt(jtnumCp.getText()));
-				c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
-				c.setDateOuverture(jtdateOuvertureCp.getText());
-				//((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
-				//((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
-				ic.creerCompte(c);
+				if(!"".equals(jtdecouvertCp.getText())) {
+					CompteCourant c = new CompteCourant();
+					c.setDecouvert(Integer.parseInt(jtdecouvertCp.getText()));
+					c.setNumCompte(Long.parseLong(jtnumCp.getText()));
+					c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
+					c.setDateOuverture(jtdateOuvertureCp.getText());
+					ic.creerCompte(c);
+					jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été créé");
+				}
+				else {
+					CompteEpargne c = new CompteEpargne();
+					c.setTauxEpargne(Float.parseFloat(jttauxCp.getText()));
+					c.setNumCompte(Long.parseLong(jtnumCp.getText()));
+					c.setSolde(Float.parseFloat(jtsoldeCp.getText()));
+					c.setDateOuverture(jtdateOuvertureCp.getText());
+					ic.creerCompte(c);
+					jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été créé");
+				}
 				jtnumCp.setText("");
 				jtsoldeCp.setText("");
 				jtdateOuvertureCp.setText("");
 				jtdecouvertCp.setText("");
 				jttauxCp.setText("");
-				jeventCp.setText("Le compte n° "+c.getNumCompte()+" a été créé");
 			}
 		});
 		
 		bCp1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Compte c = new Compte();
-				c = ic.getCompte(Integer.parseInt(jtidCp1.getText()));
-				ic.lireCompte(Integer.parseInt(jtidCp1.getText()));
+				CompteCourant c = new CompteCourant();
+				CompteEpargne ce = new CompteEpargne();
+				if(!"".equals(jtidCp1.getText())) {
+					c = ic.lireCompteCourant(Integer.parseInt(jtidCp1.getText()));
+					ce = ic.lireCompteEpargne(Integer.parseInt(jtidCp1.getText()));
+					if(c.getDecouvert()!=0 && ce.getTauxEpargne()==0) {
+						jsp = new JScrollPane(new JTable(CCModele=new CompteCourantModele()));
+						CCModele.setData(c);
+					}
+					else {
+						jsp = new JScrollPane(new JTable(CEModele=new CompteEpargneModele()));
+						CEModele.setData(ce);
+					}
+				}
+				else {
+					c = ic.lireCompteCourant(Long.parseLong(jtnumCp1.getText()));
+					ce = ic.lireCompteEpargne(Long.parseLong(jtnumCp1.getText()));
+					if(c.getDecouvert()!=0 && ce.getTauxEpargne()==0) {
+						jsp = new JScrollPane(new JTable(CCModele=new CompteCourantModele()));
+						CCModele.setData(c);
+					}
+					else {
+						jsp = new JScrollPane(new JTable(CEModele=new CompteEpargneModele()));
+						CEModele.setData(ce);
+					}
+				}
+				ongletLireCompte.add(jsp, BorderLayout.CENTER);
 				jtidCp1.setText("");
+				jtnumCp1.setText("");
 				jeventCp1.setText("Compte n° "+c.getNumCompte()+" ouvert le "+c.getDateOuverture()+ " solde = "+c.getSolde()+ "0€");
 			}
 		});
@@ -366,24 +393,50 @@ public class Fenetre extends JFrame {
 		bCp2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Compte c = new Compte();
-				c = ic.getCompte(Integer.parseInt(jtidCp2.getText()));
-				if (jtsoldeCp2.getText()==null)
-					c.setSolde(0.01);
-				else c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
-//				if (jtdecouvertCp2.getText()==null)
-//					((CompteCourant) c).setDecouvert(999999998);
-//				else ((CompteCourant) c).setDecouvert(Integer.parseInt(jtdecouvertCp2.getText()));
-//				if (jttauxCp2.getText()==null)
-//					((CompteEpargne) c).setTauxEpargne(0.01f);
-//				else ((CompteEpargne) c).setTauxEpargne(Float.parseFloat(jttauxCp2.getText()));
-//				ic.modifierCompte(c.getIdCompte(), c.getSolde(), ((CompteCourant) c).getDecouvert(), ((CompteEpargne) c).getTauxEpargne());
-				ic.modifierCompte(c.getIdCompte(), c.getSolde());
+				if(!"".equals(jtidCp2.getText()))
+					if(!"".equals(jtdecouvertCp2.getText())) {
+						CompteCourant c = new CompteCourant();
+						c = ic.lireCompteCourant(Integer.parseInt(jtidCp2.getText()));
+						if(!"".equals(jtsoldeCp2.getText()))
+							c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
+						c.setDecouvert(Integer.parseInt(jtdecouvertCp2.getText()));
+						ic.modifierCompteCourant(c.getNumCompte(), c.getSolde(), c.getDecouvert());
+						jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
+					}
+					else {
+						CompteEpargne c = new CompteEpargne();
+						c = ic.lireCompteEpargne(Integer.parseInt(jtidCp2.getText()));
+						if(!"".equals(jtsoldeCp2.getText()))
+							c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
+						if(!"".equals(jttauxCp2.getText()))
+							c.setTauxEpargne(Float.parseFloat(jttauxCp2.getText()));
+						ic.modifierCompteEpargne(c.getNumCompte(), c.getSolde(), c.getTauxEpargne());
+						jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
+					}
+				else
+					if(!"".equals(jtdecouvertCp2.getText())) {
+						CompteCourant c = new CompteCourant();
+						c = ic.lireCompteCourant(Long.parseLong(jtnumCp2.getText()));
+						if(!"".equals(jtsoldeCp2.getText()))
+							c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
+						c.setDecouvert(Integer.parseInt(jtdecouvertCp2.getText()));
+						ic.modifierCompteCourant(c.getNumCompte(), c.getSolde(), c.getDecouvert());
+						jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
+					}
+					else {
+						CompteEpargne c = new CompteEpargne();
+						c = ic.lireCompteEpargne(Long.parseLong(jtnumCp2.getText()));
+						if(!"".equals(jtsoldeCp2.getText()))
+							c.setSolde(Double.parseDouble(jtsoldeCp2.getText()));
+						if(!"".equals(jttauxCp2.getText()))
+							c.setTauxEpargne(Float.parseFloat(jttauxCp2.getText()));
+						ic.modifierCompteEpargne(c.getNumCompte(), c.getSolde(), c.getTauxEpargne());
+						jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
+					}		
 				jtidCp2.setText("");
 				jtsoldeCp2.setText("");
 				jtdecouvertCp2.setText("");
 				jttauxCp2.setText("");
-				jeventCp2.setText("Le compte n° "+c.getNumCompte()+" a été modifié");
 			}
 		});
 		
@@ -391,9 +444,17 @@ public class Fenetre extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Compte c = new Compte();
-				c = ic.getCompte(Integer.parseInt(jtidCp3.getText()));
-				ic.supprimerCompte(c.getIdCompte());
+				if(!"".equals(jtidCp3.getText())) {
+					System.out.println(jtidCp3.getText());
+					c = ic.lireCompteCourant(Integer.parseInt(jtidCp3.getText()));
+					ic.supprimerCompte(c.getNumCompte());
+				}
+				else {
+					c = ic.lireCompteCourant(Long.parseLong(jtnumCp3.getText()));
+					ic.supprimerCompte(c.getNumCompte());
+				}
 				jtidCp3.setText("");
+				jtnumCp3.setText("");
 				jeventCp3.setText("Le compte n° "+c.getNumCompte()+" a été supprimé");
 			}
 		});

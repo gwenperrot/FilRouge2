@@ -3,6 +3,8 @@ package com.maven.FilRouge.dao;
 import com.maven.FilRouge.metier.Agence;
 import com.maven.FilRouge.metier.Client;
 import com.maven.FilRouge.metier.Compte;
+import com.maven.FilRouge.metier.CompteCourant;
+import com.maven.FilRouge.metier.CompteEpargne;
 import com.maven.FilRouge.metier.Conseiller;
 import com.maven.FilRouge.metier.Employe;
 import com.maven.FilRouge.metier.Gerant;
@@ -30,11 +32,13 @@ public interface Idao {
 	public void ajouterConseiller(Conseiller c, Gerant g);
 	
 	public void creerCompte(Compte c);
-	public Compte lireCompte(int idCompte);
-	public void modifierCompte(int idCompte, double solde, int decouvert, float tauxEpargne);
-	public void modifierCompte(int idCompte, double solde);
-	public void supprimerCompte(int idCompte);
-	public Compte getCompte(int idCompte);
+	public CompteCourant lireCompteCourant(int idCompte);
+	public CompteCourant lireCompteCourant(long numCompte);
+	public CompteEpargne lireCompteEpargne(int idCompte);
+	public CompteEpargne lireCompteEpargne(long numCompte);
+	public void modifierCompteCourant(long numCompte, double solde, int decouvert);
+	public void modifierCompteEpargne(long numCompte, double solde, float tauxEpargne);
+	public void supprimerCompte(long numCompte);
 	public void faireVirement(Compte c);
 	public void simuler();
 	public void placerArgent(float montant, Compte c);
